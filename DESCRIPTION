@@ -1,0 +1,13 @@
+Package: CyEMD
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: Lis Arend, Judith Bernett, Quirin Manz
+Maintainer: Andrea Raithel <andrea.raithel@tum.de>
+Description: CyEMD is a differential analysis method developed for CyTOF data.
+    It is based on calculating Earth Mover´s Distance between expression
+    distributions that can candle strong zero-inflation without being too sensitive.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
