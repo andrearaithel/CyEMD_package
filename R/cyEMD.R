@@ -1,3 +1,5 @@
+usethis::use_package("Rcpp")
+
 Rcpp::cppFunction('double emdC(NumericVector a, NumericVector b) {
   int n = a.size();
   NumericVector dist = NumericVector(n);
@@ -45,6 +47,11 @@ rowwiseEMD <- function(mat, condition, binSize = NULL) {
   out_dt
 }
 
+usethis::use_package("BiocParallel", "Suggests")
+usethis::use_package("SummarizedExperiment")
+usethis::use_package("data.table")
+usethis::use_package("RcppAlgos")
+usethis::use_package("CATALYST")
 
 #' CyEMD
 #'

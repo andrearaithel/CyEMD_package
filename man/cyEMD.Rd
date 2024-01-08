@@ -15,7 +15,7 @@ cyEMD(
 )
 }
 \arguments{
-\item{sce}{expression data in SummarizedExperiment format}
+\item{sce}{SingleCellExperiment containing expression data}
 
 \item{nperm}{number of permutations}
 
