@@ -31,6 +31,7 @@ cyEMD(
 Differential analysis method using the Earth Mover´s Distance to compare normalized distributions.
 }
 \examples{
-sce <- readRDS("data/pbmc/sce.rds")
+path <- system.file("extdata", "pbmc/sce.rds", package = "CyEMD")
+sce <- readRDS("path")
 cyEMD(sce, condition = "condition")
 }
