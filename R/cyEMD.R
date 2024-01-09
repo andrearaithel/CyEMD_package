@@ -1,5 +1,4 @@
 globalVariables(c("marker_id", "real_emd", "result", "."))
-#usethis::use_package("Rcpp")
 
 myEMD <-  function(A, B, binSize = NULL) {
   stopifnot(is.numeric(A) & is.numeric(B))#  & (length(A) == length(B))) they do not have to be the same length, but will it have a great effect for large numbers?
@@ -35,12 +34,6 @@ rowwiseEMD <- function(mat, condition, binSize = NULL) {
   out_dt
 }
 
-#usethis::use_package("BiocParallel", "Suggests")
-#usethis::use_package("SummarizedExperiment")
-#usethis::use_package("data.table")
-#usethis::use_package("RcppAlgos")
-#usethis::use_package("CATALYST")
-
 #' CyEMD
 #'
 #' Differential analysis method using the Earth Mover´s Distance to compare normalized distributions.
@@ -55,7 +48,7 @@ rowwiseEMD <- function(mat, condition, binSize = NULL) {
 #' path <- system.file("extdata", "pbmc/sce.rds", package = "CyEMD")
 #' sce <- readRDS(path)
 #' cyEMD(sce, condition = "condition")
-#' @importFrom rlang :=
+#' @importFrom data.table :=
 #' @export
 cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1, parallel=FALSE) {
   # suppressPackageStartupMessages(library(data.table))

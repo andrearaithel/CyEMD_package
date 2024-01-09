@@ -1,6 +1,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
-// [[Rcpp::export(emdC)]]
+// [[Rcpp::export]]
 double emdC(Rcpp::NumericVector a, Rcpp::NumericVector b) {
   int n = a.size();
   Rcpp::NumericVector dist = Rcpp::NumericVector(n);
