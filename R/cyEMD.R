@@ -1,29 +1,16 @@
-usethis::use_package("Rcpp")
-
-Rcpp::cppFunction('double emdC(NumericVector a, NumericVector b) {
-  int n = a.size();
-  NumericVector dist = NumericVector(n);
-  double emd = 0;
-  for(int i = 0; i < (n - 1); ++i) {
-    dist[i + 1] = a[i] - b[i] + dist[i];
-  }
-  dist = abs(dist);
-  for (auto& d : dist)
-    emd += d;
-  return emd;
-}')
+globalVariables(c("marker_id", "real_emd", "result", "."))
 
 myEMD <-  function(A, B, binSize = NULL) {
   stopifnot(is.numeric(A) & is.numeric(B))#  & (length(A) == length(B))) they do not have to be the same length, but will it have a great effect for large numbers?
-  if (is.null(binSize)) binSize <- 2 * IQR(c(A[A!=0], B[B!=0])) / length(c(A[A!=0], B[B!=0]))^(1/3)
+  if (is.null(binSize)) binSize <- 2 * stats::IQR(c(A[A!=0], B[B!=0])) / length(c(A[A!=0], B[B!=0]))^(1/3)
 
   bins <- seq(floor(min(c(A, B))),
               ceiling(max(c(A, B))),
               by=binSize )
   if (max(bins) < max(A,B)) bins <- c(bins, bins[length(bins)] + binSize)
 
-  histA <- hist(A, breaks=bins, plot=FALSE)
-  histB <- hist(B, breaks=bins, plot=FALSE)
+  histA <- graphics::hist(A, breaks=bins, plot=FALSE)
+  histB <- graphics::hist(B, breaks=bins, plot=FALSE)
 
   densA <- histA$density
   densA <- densA/sum(densA)
@@ -47,17 +34,12 @@ rowwiseEMD <- function(mat, condition, binSize = NULL) {
   out_dt
 }
 
-usethis::use_package("BiocParallel", "Suggests")
-usethis::use_package("SummarizedExperiment")
-usethis::use_package("data.table")
-usethis::use_package("RcppAlgos")
-usethis::use_package("CATALYST")
-
 #' CyEMD
 #'
 #' Differential analysis method using the Earth Mover´s Distance to compare normalized distributions.
 #' @param sce SingleCellExperiment containing expression data
-#' @param binsize bin width of histograms
+#' @param condition to-do
+#' @param binSize bin width of histograms
 #' @param nperm number of permutations
 #' @param assay name of assay in sce containing relevant data
 #' @param seed set seed for reproducibility
@@ -66,6 +48,7 @@ usethis::use_package("CATALYST")
 #' path <- system.file("extdata", "pbmc/sce.rds", package = "CyEMD")
 #' sce <- readRDS(path)
 #' cyEMD(sce, condition = "condition")
+#' @importFrom data.table :=
 #' @export
 cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1, parallel=FALSE) {
   # suppressPackageStartupMessages(library(data.table))
@@ -102,3 +85,4 @@ cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1
 
   return(res_agg)
 }
+

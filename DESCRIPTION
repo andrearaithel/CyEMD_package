@@ -7,15 +7,19 @@ Maintainer: Andrea Raithel <andrea.raithel@tum.de>
 Description: CyEMD is a differential analysis method developed for CyTOF data.
     It is based on calculating Earth Mover´s Distance between expression
     distributions that can candle strong zero-inflation without being too sensitive.
-License: What license is it under?
+License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
 Imports: 
     CATALYST,
     data.table,
-    Rcpp,
     RcppAlgos,
-    SummarizedExperiment
+    SummarizedExperiment,
+    stats,
+    graphics,
+    Rcpp
 Suggests: 
     BiocParallel
+LinkingTo: 
+    Rcpp    
