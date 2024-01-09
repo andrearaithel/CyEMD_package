@@ -17,6 +17,10 @@ cyEMD(
 \arguments{
 \item{sce}{SingleCellExperiment containing expression data}
 
+\item{condition}{to-do}
+
+\item{binSize}{bin width of histograms}
+
 \item{nperm}{number of permutations}
 
 \item{assay}{name of assay in sce containing relevant data}
@@ -24,8 +28,6 @@ cyEMD(
 \item{seed}{set seed for reproducibility}
 
 \item{parallel}{enable parallel computing}
-
-\item{binsize}{bin width of histograms}
 }
 \description{
 Differential analysis method using the Earth Mover´s Distance to compare normalized distributions.
