@@ -63,7 +63,7 @@ usethis::use_package("CATALYST")
 #' @param seed set seed for reproducibility
 #' @param parallel enable parallel computing
 #' @examples
-#' path <- system.file("inst/extdata", "pbmc/sce.rds", package = "CyEMD")
+#' path <- system.file("extdata", "pbmc/sce.rds", package = "CyEMD")
 #' sce <- readRDS(path)
 #' cyEMD(sce, condition = "condition")
 #' @export
