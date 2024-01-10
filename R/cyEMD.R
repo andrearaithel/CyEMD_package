@@ -37,20 +37,21 @@ rowwiseEMD <- function(mat, condition, binSize = NULL) {
 #' CyEMD
 #'
 #' Differential analysis method using the Earth Mover´s Distance to compare normalized distributions.
-#' @param sce SingleCellExperiment containing expression data
-#' @param condition to-do
-#' @param binSize bin width of histograms
-#' @param nperm number of permutations
-#' @param assay name of assay in sce containing relevant data
-#' @param seed set seed for reproducibility
-#' @param parallel enable parallel computing
+#' @param sce SingleCellExperiment containing expression data and metadata.
+#' @param condition Name of vector specifying the comparison of interest.
+#' @param binSize Bin width of histograms. If NULL (default), a flexible bin width is estimated by the Freedman-Diaconis rule evaluated on all non-zero values.
+#' @param nperm Number of permutations. The default is 100.
+#' @param assay Name of assay containing relevant data. The default is "exprs".
+#' @param seed Seed initialization for reproducibility. The default is 1.
+#' @param parallel Logical value indicating whether calculations should be performed in parallel. The default is FALSE.
+#' @param replace Logical value indicating whether permutations should be performed with or without replacement. The default is FALSE.
 #' @examples
 #' path <- system.file("extdata", "pbmc/sce.rds", package = "CyEMD")
 #' sce <- readRDS(path)
 #' cyEMD(sce, condition = "condition")
 #' @importFrom data.table :=
 #' @export
-cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1, parallel=FALSE) {
+cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1, parallel=FALSE, replace=FALSE) {
   # suppressPackageStartupMessages(library(data.table))
   bppar <- BiocParallel::bpparam()
 
@@ -70,7 +71,7 @@ cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1
 
   # compute permutations of sample conditions
   sceEI <- CATALYST::ei(sce)
-  perms <- RcppAlgos::permuteSample(sceEI[[condition]], n = nperm, seed = seed)
+  perms <- RcppAlgos::permuteSample(sceEI[[condition]], n = nperm, seed = seed, repetition = replace)
   perm_res <- BiocParallel::bplapply(as.data.frame(t(unclass(perms))), function(perm, sceEI, data, binSize) {
     condition_permutation_cells <- rep(perm, times=sceEI$n_cells)
     rowwiseEMD(mat = data, condition = condition_permutation_cells, binSize = binSize)
