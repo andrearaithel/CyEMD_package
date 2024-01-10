@@ -11,23 +11,26 @@ cyEMD(
   nperm = 100,
   assay = "exprs",
   seed = 1,
-  parallel = FALSE
+  parallel = FALSE,
+  replace = FALSE
 )
 }
 \arguments{
-\item{sce}{SingleCellExperiment containing expression data}
+\item{sce}{SingleCellExperiment containing expression data and metadata.}
 
-\item{condition}{to-do}
+\item{condition}{Name of vector specifying the comparison of interest.}
 
-\item{binSize}{bin width of histograms}
+\item{binSize}{Bin width of histograms. If NULL (default), a flexible bin width is estimated by the Freedman-Diaconis rule evaluated on all non-zero values.}
 
-\item{nperm}{number of permutations}
+\item{nperm}{Number of permutations. The default is 100.}
 
-\item{assay}{name of assay in sce containing relevant data}
+\item{assay}{Name of assay containing relevant data. The default is "exprs".}
 
-\item{seed}{set seed for reproducibility}
+\item{seed}{Seed initialization for reproducibility. The default is 1.}
 
-\item{parallel}{enable parallel computing}
+\item{parallel}{Logical value indicating whether calculations should be performed in parallel. The default is FALSE.}
+
+\item{replace}{Logical value indicating whether permutations should be performed with or without replacement. The default is FALSE.}
 }
 \description{
 Differential analysis method using the Earth Mover´s Distance to compare normalized distributions.
