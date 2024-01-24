@@ -1,6 +1,6 @@
-# CyEMD: Differential analysis method developed for CyTOF data
-R package providing a differential analysis method using the Earth Mover´s Distance to compare normalized distributions
-
+# CyEMD: A differential analysis method developed for CyTOF data
+The CyEMD R package provides a differential analysis method that is based on calculating the Earth Mover´s 
+Distance between expression distributions. It can candle strong zero-inflation without being too sensitive.
 
 ## Installation
 Currently the package is only available on GitHub. For installation use one of the following possibilities:
