@@ -32,6 +32,9 @@ cyEMD(
 
 \item{replace}{Logical value indicating whether permutations should be performed with or without replacement. The default is FALSE.}
 }
+\value{
+data.table containing marker IDs, EMDs and empirical p-values
+}
 \description{
 Differential analysis method using the Earth Mover´s Distance to compare normalized distributions.
 }

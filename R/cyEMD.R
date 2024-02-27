@@ -45,6 +45,7 @@ rowwiseEMD <- function(mat, condition, binSize = NULL) {
 #' @param seed Seed initialization for reproducibility. The default is 1.
 #' @param parallel Logical value indicating whether calculations should be performed in parallel. The default is FALSE.
 #' @param replace Logical value indicating whether permutations should be performed with or without replacement. The default is FALSE.
+#' @returns data.table containing marker IDs, EMDs and empirical p-values
 #' @examples
 #' path <- system.file("extdata", "pbmc/sce.rds", package = "CyEMD")
 #' sce <- readRDS(path)
