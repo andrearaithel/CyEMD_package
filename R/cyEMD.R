@@ -1,6 +1,6 @@
 globalVariables(c("marker_id", "real_emd", "result", "."))
 
-myEMD <-  function(A, B, binSize = NULL) {
+myEMD <-  function(A, B, binSize = NULL, cluster_id="1") {
   stopifnot(is.numeric(A) & is.numeric(B))
   if (is.null(binSize)) 
     binSize <- 2 * stats::IQR(c(A[A != 0], B[B != 0]))/length(c(A[A != 
@@ -24,7 +24,7 @@ myEMD <-  function(A, B, binSize = NULL) {
   return(emd)
 }
 
-rowwiseEMD <- function(mat, condition, binSize = NULL) {
+rowwiseEMD <- function(mat, condition, binSize = NULL, cluster_id="1") {
   stopifnot(is.matrix(mat), is.numeric(mat), nlevels(as.factor(condition)) == 
               2, ncol(mat) == length(condition))
   condition <- as.factor(condition)
@@ -55,7 +55,7 @@ rowwiseEMD <- function(mat, condition, binSize = NULL) {
 #' cyEMD(sce, condition = "condition")
 #' @importFrom data.table :=
 #' @export
-cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1, parallel=FALSE, replace=FALSE) {
+cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1, parallel=FALSE, replace=FALSE, cluster_id="1") {
   sceEI <- CATALYST::ei(sce)
   if(length(unique(sceEI[[condition]])) == 1){
     message("Only one condition detected. Returning NA.")
