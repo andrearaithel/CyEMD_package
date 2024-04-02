@@ -1,7 +1,7 @@
 Package: CyEMD
 Type: Package
 Title: Differential analysis method using Earth Mover´s Distance
-Version: 0.1.1
+Version: 0.1.2
 Author: Lis Arend, Judith Bernett, Quirin Manz
 Maintainer: Andrea Raithel <andrea.raithel@tum.de>
 Description: CyEMD is a differential analysis method developed for CyTOF data.
