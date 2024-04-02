@@ -120,7 +120,7 @@ cyEMD <- function(sce, condition, binSize=NULL, nperm=100, assay="exprs", seed=1
                                      function(perm, sceEI, data, binSize) {
                                        condition_permutation_cells <- rep(perm, times = sceEI$n_cells)
                                        rowwiseEMD(mat = data, condition = condition_permutation_cells, 
-                                                  binSize = binSize)
+                                                  binSize = binSize, cluster_id=cluster_id)
                                      }, sceEI, data, binSize, BPPARAM = bppar)
   all_perms <- data.table::rbindlist(perm_res, idcol = "permutation")
   data.table::setkey(all_perms, marker_id)
